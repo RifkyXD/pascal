@@ -5,9 +5,57 @@ uses
 
 
 var
-  pilih: integer;
+  pilih,pilih1,cookie: integer;
   username, password, user, pass, usernm, passwd: string;
   t, f, l: text;
+
+procedure save;
+begin
+assign(t,'/admin/cookie.txt');
+rewrite(t);
+writeln(t,cookie);
+writeln(t,user);
+writeln(t,passwd);
+end;
+
+function get(s:string):string;
+begin
+assign(f,'/admin/'+s);
+reset(f);
+readln(f,usernm);
+readln(f,passwd);
+end;
+
+procedure menu;
+begin
+repeat
+clrscr;
+writeln('Menu ',user);
+writeln('1. ');
+writeln('0. logout');
+write('pilih : ');
+readln(pilih1);
+case pilih1 of
+0:begin
+cookie:=0;
+save;
+end
+else
+begin
+writeln('Pilihan tidak ada');
+delay(1000);
+end;
+end;
+until pilih1=0;
+end; 
+  
+procedure ceklogin;
+begin
+assign(t,'/admin/cookie.txt');
+reset(t);
+readln(t,cookie);
+readln(t,user);
+end;
 
 procedure cekakun;
 
@@ -95,7 +143,10 @@ begin
       if (pass = password) then
         begin
           writeln('Login berhasil');
+          cookie:=1;
+          save;
           delay(1000);
+          menu;
         end 
       else 
         begin
@@ -120,11 +171,27 @@ begin
     case pilih of 
       1: buatakun;
       2: login;
+      0:exit
+      else
+      begin
+writeln('Pilihan tidak ada');
+delay(1000);
+end;
     end;
   until pilih = 0;
 end; 
 
 begin
+pilih:=1;
+
+repeat
   clrscr;
+  ceklogin;
+  if cookie=1 then
+  begin
+  menu;
+end
+else
   mainmenu;
+  until pilih=0;
 end.
