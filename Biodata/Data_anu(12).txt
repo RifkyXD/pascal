@@ -1,0 +1,4 @@
+Nama : anu
+Kelas : 12
+Alamat : lok
+TTL : 99999
