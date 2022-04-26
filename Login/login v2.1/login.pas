@@ -15,7 +15,7 @@ assign(t,'/admin/cookie.txt');
 rewrite(t);
 writeln(t,cookie);
 writeln(t,user);
-writeln(t,passwd);
+writeln(t,pass);
 end;
 
 function get(s:string):string;
@@ -61,6 +61,7 @@ assign(t,'/admin/cookie.txt');
 reset(t);
 readln(t,cookie);
 readln(t,user);
+readln(t,pass);
 end;
 
 procedure cekakun;
@@ -149,7 +150,7 @@ begin
       if (pass = password) then
         begin
           writeln('Login berhasil');
-          cookie:=1;
+          cookie:=1;          
           save;
           delay(1000);
           menu;
@@ -188,11 +189,12 @@ end;
 end; 
 
 begin
-pilih:=0;
+pilih:=1;
 repeat
   clrscr;
   ceklogin;
-  if cookie=1 then
+  cekakun;
+  if (cookie=1) and (user=usernm) and (pass=passwd) then
   begin
   menu;
 end
