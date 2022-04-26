@@ -2,8 +2,23 @@ program haya;
 uses crt;
 var
 pilih:integer;
-user,pass:string;
+user,pass,username,password:string;
 f,t:text;
+
+procedure get;
+begin
+assign(t,'/admin/admin');
+reset(t);
+readln(t,username);
+readln(t,password);
+end;
+
+procedure cek;
+begin
+get;
+
+
+end;
 
 procedure liatsemuauser;
 begin
@@ -49,16 +64,33 @@ end;
 begin
 repeat
 clrscr;
+writeln('login admin');
+write('user : ');
+readln(user);
+write('pass : ');
+readln(pass);
+cek;
+if (user<>username) then
+writeln('username/password salah');
+delay(1000);
+
+until(user=username) and (pass=password);
+if (user=username) and (pass=password) then
+begin
+repeat
+clrscr;
 writeln('1. hapus data semua akun');
 writeln('2. hapus semua user');
 writeln('3. liat semua user');
+writeln('0. exit');
 write('pilih : ');
 readln(pilih);
 
 case pilih of
 1:hapussemuaakun();
 2:resetuser();
-3:liatsemuauser()
+3:liatsemuauser();
+0:exit;
 else
 begin
 writeln('pilihan tidak ada');
@@ -66,6 +98,5 @@ delay(1000);
 end;
 end;
 until pilih=0
-
-
+end;
 end.

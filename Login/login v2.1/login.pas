@@ -32,13 +32,19 @@ repeat
 clrscr;
 writeln('Menu ',user);
 writeln('1. ');
-writeln('0. logout');
+writeln('9. logout');
+writeln('0. exit');
 write('pilih : ');
 readln(pilih1);
 case pilih1 of
-0:begin
+9:begin
 cookie:=0;
 save;
+exit;
+end;
+0:begin
+pilih:=0;
+exit;
 end
 else
 begin
@@ -182,8 +188,7 @@ end;
 end; 
 
 begin
-pilih:=1;
-
+pilih:=0;
 repeat
   clrscr;
   ceklogin;
