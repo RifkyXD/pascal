@@ -1,11 +1,11 @@
-program toolfixadmin; 
+program tooladmin; 
 
 uses
   crt;
 
 
 var
-  pilih: integer;
+  pilih,id: integer;
   user, pass, username, password: string;
   f, t,l: text;
 
@@ -31,7 +31,7 @@ begin
   while not eoln(f) do 
     begin
       readln(f, pass);
-      writeln('•', pass) 
+      writeln(pass) 
     end;
   close(f);
   readln;
@@ -101,12 +101,12 @@ begin
     if (user <> username) then
       writeln('username/password salah') ;
     delay(1000);
-  until (user = username) and (pass = password);
+  until (user =username) and (pass =password);
   if (user = username) and (pass = password) then
     begin
       repeat 
         clrscr;
-        writeln('1. hapus data semua akun');
+        writeln('1. hapus data semua user');
         writeln('2. hapus semua user');
         writeln('3. liat semua user');
         writeln('4. reset ');

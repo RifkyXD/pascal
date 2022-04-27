@@ -5,7 +5,7 @@ uses
 
 
 var
-  pilih,pilih1,cookie: integer;
+  pilih,pilih1,cookie,id: integer;
   username, password, user, pass, usernm, passwd: string;
   t, f, l: text;
 
@@ -31,6 +31,7 @@ begin
 repeat
 clrscr;
 writeln('Menu ',user);
+writeln('ID anda : ',id);
 writeln('1. ');
 writeln('9. logout');
 writeln('0. exit');
@@ -150,7 +151,8 @@ begin
       if (pass = password) then
         begin
           writeln('Login berhasil');
-          cookie:=1;          
+          cookie:=1;
+                    
           save;
           delay(1000);
           menu;
@@ -192,9 +194,11 @@ begin
 pilih:=1;
 repeat
   clrscr;
+  
   ceklogin;
   cekakun;
-  if (cookie=1) and (user=usernm) and (pass=passwd) then
+  get(user);
+  if (cookie=1) and (user=usernm)and (pass=passwd) then
   begin
   menu;
 end
