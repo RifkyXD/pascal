@@ -18,12 +18,13 @@ writeln(t,user);
 writeln(t,pass);
 end;
 
-function get(s:string):string;
+procedure infoakun;
 begin
-assign(f,'/admin/'+s);
-reset(f);
-readln(f,usernm);
-readln(f,passwd);
+clrscr;
+writeln('INFO AKUN');
+writeln('===========');
+writeln('ID : ',id);
+
 end;
 
 procedure menu;
@@ -38,6 +39,7 @@ writeln('0. exit');
 write('pilih : ');
 readln(pilih1);
 case pilih1 of
+
 9:begin
 cookie:=0;
 save;
@@ -58,6 +60,14 @@ end;
   
 procedure ceklogin;
 begin
+assign(t,'/akun/'+user);
+reset(t);
+readln(t,usernm);
+readln(t,passwd);
+end;
+
+procedure cekcookie;
+begin
 assign(t,'/admin/cookie.txt');
 reset(t);
 readln(t,cookie);
@@ -73,6 +83,11 @@ begin
   while not eoln(t) do 
     begin
       readln(t, usernm);
+      if usernm=user then
+      break
+else
+continue;
+      
     end;
 end; 
 procedure buatakun;
@@ -107,6 +122,7 @@ begin
       writeln(f, username);
       assign(t, '/akun/' + username);
       rewrite(t);
+      writeln(t,username);
       writeln(t, password);
       close(f);
       close(l);
@@ -172,6 +188,7 @@ procedure mainmenu;
 begin
   repeat 
     clrscr;
+    
     writeln('1. Buat akun');
     writeln('2. Login');
     writeln('0. Exit');
@@ -194,11 +211,10 @@ begin
 pilih:=1;
 repeat
   clrscr;
-  
+  cekcookie;
   ceklogin;
   cekakun;
-  get(user);
-  if (cookie=1) and (user=usernm)and (pass=passwd) then
+  if (cookie=1) and (user=usernm) and (pass=passwd) then
   begin
   menu;
 end
